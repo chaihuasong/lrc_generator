@@ -28,8 +28,16 @@ export default {
   methods: {
     lrcGenerator () {
       var text = this.textarea
-      while (text.indexOf('\n') <= 1) {
+      if (text.indexOf('\n') <= 1) {
         text = text.replace('\n', '')
+      }
+      // eslint-disable-next-line eqeqeq
+      if (text.trim() == '') {
+        this.$message({
+          message: '未输入任何内容！',
+          type: 'warning'
+        })
+        return
       }
       text = text.replace('\n', 'tt_rp')
       var formated = text.replace(/\n/g, '')
@@ -95,6 +103,14 @@ export default {
       })
     },
     lrcCheck () {
+      // eslint-disable-next-line eqeqeq
+      if (this.textarea.trim() == '') {
+        this.$message({
+          message: '未输入任何内容！',
+          type: 'warning'
+        })
+        return
+      }
       var arry = this.textarea.split('\n')
       for (var i = 0; i < arry.length; i++) {
         if (arry[i].length > 50) {
