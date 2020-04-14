@@ -1,7 +1,20 @@
 <template xmlns:el-row="http://www.w3.org/1999/html">
   <div>
-    <h2>{{ msg }}</h2>
-
+    <el-row>
+      <div style="display: inline-flex">
+      <h2 >{{ msg }}</h2>
+        <el-tooltip class="item" effect="light" placement="bottom-start" style="border: white;margin-top: 10px;">
+          <div slot="content" style="font-size: 16px;color: grey; line-height:1.8">
+            注： Generator之后需要二次编辑确认 <br/>
+            <div style="color: red;display: inline-flex;margin-right: 10px">*</div>结果需要满足： <br/>
+            1. 第一行以[00:00.00]开头 <br/>
+            2. 每行都需要包含时间标签 <br/>
+            3. 每行去除时间标签不超过40个字
+          </div>
+          <el-button style="height: fit-content;font-size: 10px;color: grey">?</el-button>
+        </el-tooltip>
+      </div>
+    </el-row>
     <el-input
       type="textarea"
       placeholder="请输入内容"
