@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <div style="display: inline-flex">
-      <h2 >{{ msg }}</h2>
+      <h2 style="margin-top: 15px">{{ msg }}</h2>
         <el-tooltip class="item" effect="light" placement="bottom-start" style="border: white;margin-top: 10px;">
           <div slot="content" style="font-size: 16px;color: grey; line-height:1.8">
             注： Generator之后需要二次编辑确认 <br/>
@@ -22,7 +22,7 @@
       :rows="30"
       v-model="textarea">
     </el-input>
-    <el-row style="margin-top: 10px">
+    <el-row style="margin-top: 10px;margin-bottom: 20px">
       <el-button type="primary" @click="lrcGenerator">Generator</el-button>
       <el-button type="primary" @click="lrcCheck">结果校验</el-button>
     </el-row>
