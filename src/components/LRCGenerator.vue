@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <div style="display: inline-flex">
-      <h2 style="margin-top: 15px">{{ msg }}</h2>
+      <h2 style="margin-top: 15px;margin-left: 30px">{{ msg }}</h2>
         <el-tooltip class="item" effect="light" placement="bottom-start" style="border: white;margin-top: 10px;">
           <div slot="content" style="font-size: 16px;color: grey; line-height:1.8">
             注： Generator之后需要二次编辑确认 <br/>
