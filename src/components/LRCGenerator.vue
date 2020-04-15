@@ -9,7 +9,9 @@
             <div style="color: red;display: inline-flex;margin-right: 10px">*</div>结果需要满足： <br/>
             1. 第一行以[00:00.00]开头 <br/>
             2. 每行都需要包含时间标签 <br/>
-            3. 每行去除时间标签不超过40个字
+            3. 每行去除时间标签不超过40个字 <br/>
+            4. 每行去除时间标签30个字以内为最佳 <br/>
+            5. 符号保留即可，不做删减
           </div>
           <el-button style="height: fit-content;font-size: 10px;color: grey">?</el-button>
         </el-tooltip>
@@ -66,7 +68,11 @@ export default {
       var arry = formated.split('\n')
       var result = ''
       for (var i = 0; i < arry.length; i++) {
-        if (arry[i].length > 30) {
+        var length = 30
+        if (arry[i].startsWith('[') && arry[i].indexOf(']') > 0 && arry[i].indexOf(':') > 0) {
+          length += 10
+        }
+        if (arry[i].length > length) {
           if (arry[i].indexOf('，') <= 0) {
             result += arry[i].trim() + '\n'
             continue
@@ -74,7 +80,7 @@ export default {
           var tmpArray = arry[i].split('，')
           var tmp = tmpArray[0].trim() + '，'
           for (var j = 1; j < tmpArray.length; j++) {
-            if (tmp.length + tmpArray[j].length <= 30 &&
+            if (tmp.length + tmpArray[j].length <= length &&
               !tmpArray[j].startsWith('講  師：') &&
               !tmpArray[j].startsWith('講 師：') &&
               !tmpArray[j].startsWith('講師：') &&
