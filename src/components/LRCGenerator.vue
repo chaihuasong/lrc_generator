@@ -7,8 +7,8 @@
           <div slot="content" style="font-size: 16px;color: grey; line-height:1.8">
             注： Generator之后需要二次编辑确认 <br/>
             <div style="color: red;display: inline-flex;margin-right: 10px">*</div>结果需要满足： <br/>
-            1. 第一行以[00:00.00]开头 <br/>
-            2. 每行都需要包含时间标签 <br/>
+            1. 第一行标题行以[00:00.00]开头 <br/>
+            2. 每行字幕都需要包含时间标签 <br/>
             3. 每行去除时间标签不超过40个字 <br/>
             4. 每行去除时间标签30个字以内为最佳 <br/>
             5. 符号保留即可，不做删减
