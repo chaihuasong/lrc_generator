@@ -9,9 +9,9 @@
             <div style="color: red;display: inline-flex;margin-right: 10px">*</div>结果需要满足： <br/>
             1. 第一行标题行以[00:00.00]开头 <br/>
             2. 每行字幕都需要包含时间标签 <br/>
-            3. 每行去除时间标签不超过40个字 <br/>
-            4. 每行去除时间标签30个字以内为最佳 <br/>
-            5. 符号保留即可，不做删减
+            3. 每行去除时间标签不超过20个字 <br/>
+            4. 符号需要使用空格代替 <br/>
+            5. Generator按钮只能点击一次
           </div>
           <el-button style="height: fit-content;font-size: 10px;color: grey">?</el-button>
         </el-tooltip>
@@ -68,7 +68,7 @@ export default {
       var arry = formated.split('\n')
       var result = ''
       for (var i = 0; i < arry.length; i++) {
-        var length = 30
+        var length = 20
         if (arry[i].startsWith('[') && arry[i].indexOf(']') > 0 && arry[i].indexOf(':') > 0) {
           length += 10
         }
@@ -114,7 +114,18 @@ export default {
 
       var finalResult = result.replace(/\n”/g, '”\n')
       finalResult = finalResult.replace(/\n\n/g, '\n')
-      finalResult = finalResult.replace('tt_rp', '\n\n')
+      finalResult = finalResult.replace('tt_rp', '\n')
+
+      finalResult = finalResult.replace(/。/g, ' ')
+      finalResult = finalResult.replace(/！/g, ' ')
+      finalResult = finalResult.replace(/？/g, ' ')
+      finalResult = finalResult.replace(/，/g, ' ')
+      finalResult = finalResult.replace(/、/g, ' ')
+      finalResult = finalResult.replace(/……/g, ' ')
+      finalResult = finalResult.replace(/；/g, ' ')
+      finalResult = finalResult.replace(/：/g, ' ')
+      finalResult = finalResult.replace(/～/g, ' ')
+
       this.textarea = finalResult
       this.$message({
         message: '格式转换完成! 共' + finalResult.length + '个字',
@@ -132,9 +143,9 @@ export default {
       }
       var arry = this.textarea.split('\n')
       for (var i = 0; i < arry.length; i++) {
-        if (arry[i].length > 50) {
+        if (arry[i].length > 30) {
           this.$message({
-            message: '该行字数太长，建议换行：\n' + arry[i],
+            message: '该行字数太长，请换行：\n' + arry[i],
             type: 'warning'
           })
           return
