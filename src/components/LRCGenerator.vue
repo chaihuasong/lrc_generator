@@ -9,7 +9,7 @@
             <div style="color: red;display: inline-flex;margin-right: 10px">*</div>结果需要满足： <br/>
             1. 第一行标题行以[00:00.00]开头 <br/>
             2. 每行字幕都需要包含时间标签 <br/>
-            3. 每行去除时间标签不超过20个字 <br/>
+            3. 每行去除时间标签不超过18个字 <br/>
             4. 符号需要使用空格代替 <br/>
             5. Generator按钮只能点击一次
           </div>
@@ -26,7 +26,7 @@
     </el-input>
     <el-row style="margin-top: 10px;margin-bottom: 20px">
       <el-button type="primary" @click="lrcGenerator">Generator</el-button>
-      <el-button type="primary" @click="lrcCheck">结果校验</el-button>
+      <el-button type="primary" @click="lrcCheck">字数校验</el-button>
     </el-row>
   </div>
 </template>
@@ -68,7 +68,7 @@ export default {
       var arry = formated.split('\n')
       var result = ''
       for (var i = 0; i < arry.length; i++) {
-        var length = 20
+        var length = 18
         if (arry[i].startsWith('[') && arry[i].indexOf(']') > 0 && arry[i].indexOf(':') > 0) {
           length += 10
         }
@@ -116,15 +116,15 @@ export default {
       finalResult = finalResult.replace(/\n\n/g, '\n')
       finalResult = finalResult.replace('tt_rp', '\n')
 
-      finalResult = finalResult.replace(/。/g, ' ')
-      finalResult = finalResult.replace(/！/g, ' ')
-      finalResult = finalResult.replace(/？/g, ' ')
-      finalResult = finalResult.replace(/，/g, ' ')
-      finalResult = finalResult.replace(/、/g, ' ')
-      finalResult = finalResult.replace(/……/g, ' ')
-      finalResult = finalResult.replace(/；/g, ' ')
-      finalResult = finalResult.replace(/：/g, ' ')
-      finalResult = finalResult.replace(/～/g, ' ')
+      finalResult = finalResult.replace(/。/g, '')
+      finalResult = finalResult.replace(/！/g, '')
+      finalResult = finalResult.replace(/？/g, '')
+      finalResult = finalResult.replace(/，/g, '')
+      finalResult = finalResult.replace(/、/g, '')
+      finalResult = finalResult.replace(/……/g, '')
+      finalResult = finalResult.replace(/；/g, '')
+      finalResult = finalResult.replace(/：/g, '')
+      finalResult = finalResult.replace(/～/g, '')
 
       this.textarea = finalResult
       this.$message({
@@ -143,7 +143,7 @@ export default {
       }
       var arry = this.textarea.split('\n')
       for (var i = 0; i < arry.length; i++) {
-        if (arry[i].length > 30) {
+        if (arry[i].length > 18) {
           this.$message({
             message: '该行字数太长，请换行：\n' + arry[i],
             type: 'warning'
@@ -151,13 +151,13 @@ export default {
           return
         }
         // eslint-disable-next-line eqeqeq
-        if (arry[i].trim() != '' && (!arry[i].startsWith('[') || arry[i].indexOf('[') < 0 || arry[i].indexOf(']') < 0)) {
+        /* if (arry[i].trim() != '' && (!arry[i].startsWith('[') || arry[i].indexOf('[') < 0 || arry[i].indexOf(']') < 0)) {
           this.$message({
             message: '未包含时间的行：\n' + arry[i],
             type: 'warning'
           })
           return
-        }
+        } */
       }
       this.$message({
         message: '校验成功！可以发布了',
